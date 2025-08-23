@@ -1,0 +1,45 @@
+package login;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet(urlPatterns= {"/hi"})
+public class HelloServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        // Lấy cookie "username"
+        String username = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie c : cookies) {
+                if ("username".equals(c.getName())) {
+                    username = c.getValue();
+                    break;
+                }
+            }
+        }
+
+        if (username != null) {
+            out.println("<h1>Xin chào, " + username + "!</h1>");
+            out.println("<a href=\"" + request.getContextPath() + "/dangnhap\">Logou</a>");
+        } else {
+            out.println("<h1>Không tìm thấy cookie username — bạn chưa login</h1>");
+            out.println("<a href=\"" + request.getContextPath() + "/dangnhap\">Đăng nhập</a>");
+        }
+
+        out.close();
+    }
+}

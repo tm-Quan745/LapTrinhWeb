@@ -1,7 +1,6 @@
 package login;
 
 import java.io.IOException;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -9,31 +8,49 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/login"})
+@WebServlet(urlPatterns = {"/dangnhap"})
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+            throws ServletException, IOException {
+        resp.sendRedirect(req.getContextPath() + "/Login.html");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
-        resp.setContentType("text/html");
 
-        // lấy dữ liệu từ tham số của form
+        // Debug: in log để kiểm tra servlet có được gọi
+        System.out.println("LoginServlet.doPost called");
+
+        resp.setContentType("text/html;charset=UTF-8");
+
         String user = req.getParameter("username");
         String pass = req.getParameter("password");
 
+        System.out.println("Raw params -> user:[" + user + "], pass:[" + pass + "]");
+
+        // Trim để loại khoảng trắng vô tình
+        if (user != null) user = user.trim();
+        if (pass != null) pass = pass.trim(); 
+
+        System.out.println("Trimmed -> user:[" + user + "], pass:[" + pass + "]");
+
         if ("quan".equals(user) && "123".equals(pass)) {
-            // khởi tạo cookie
+            System.out.println("Login success, redirecting to /hi");
             Cookie cookie = new Cookie("username", user);
-            // thiết lập thời gian tồn tại 30s của cookie
+            // đảm bảo cookie được gửi tới toàn app
+            cookie.setPath(req.getContextPath().isEmpty() ? "/" : req.getContextPath());
             cookie.setMaxAge(30);
-            // thêm cookie vào response
             resp.addCookie(cookie);
-            // chuyển sang trang HelloServlet
+
+            // redirect đến /<context>/hi
             resp.sendRedirect(req.getContextPath() + "/hi");
         } else {
-            // chuyển sang trang LoginServlet (hoặc trang login.jsp)
-            resp.sendRedirect(req.getContextPath() + "/login");
+            System.out.println("Login failed, redirecting back to Login.html");
+            resp.sendRedirect(req.getContextPath() + "/Login.html");
         }
     }
 }
