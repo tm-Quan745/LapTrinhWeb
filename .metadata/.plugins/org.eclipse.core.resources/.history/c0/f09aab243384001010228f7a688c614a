@@ -1,0 +1,49 @@
+package controller;
+
+import java.io.IOException;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import model.User;
+import service.UserService;
+import service.UserServiceImpl;
+
+@SuppressWarnings("serial")
+@WebServlet(urlPatterns = "/register")
+public class RegisterController extends HttpServlet {
+
+    private UserService userService = new UserServiceImpl();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        String email = req.getParameter("email");
+        String fullname = req.getParameter("fullname");
+        String phone = req.getParameter("phone");
+
+        User u = new User();
+        u.setUsername(username);
+        u.setPassword(password);
+        u.setEmail(email);
+        u.setFullname(fullname);
+        u.setPhone(phone);
+        u.setRoleId(3); // mặc định role là User
+
+        userService.register(u);
+
+        resp.sendRedirect(req.getContextPath() + "/login");
+    }
+}

@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <h2>Đăng ký tài khoản</h2>
+    <form action="register" method="post">
+        <label for="username">Tên đăng nhập:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Mật khẩu:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="fullname">Họ tên:</label><br>
+        <input type="text" id="fullname" name="fullname" required><br><br>
+
+        <label for="avatar">Avatar (URL):</label><br>
+        <input type="text" id="avatar" name="avatar"><br><br>
+
+        <label for="phone">Số điện thoại:</label><br>
+        <input type="text" id="phone" name="phone"><br><br>
+
+        <!-- Role mặc định là user -->
+        <input type="hidden" name="roleid" value="2">
+
+        <button type="submit">Đăng ký</button>
+    </form>
+</body>
+</html>

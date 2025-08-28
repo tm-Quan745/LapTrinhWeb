@@ -1,0 +1,66 @@
+	<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	
+	<!DOCTYPE html>
+	<html lang="vi">
+	<head>
+	    <meta charset="UTF-8">
+	    <title>Đăng nhập</title>
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+	</head>
+	
+	<body>
+	    <div class="container" style="max-width: 400px; margin-top: 50px;">
+	        <form action="login" method="post" class="form-horizontal">
+	            <h2 class="text-center">Đăng nhập</h2>
+	
+	            <!-- Hiển thị thông báo lỗi -->
+	            <c:if test="${not empty alert}">
+	                <div class="alert alert-danger text-center">${alert}</div>
+	            </c:if>
+	
+	            <!-- Username -->
+	            <div class="form-group">
+	                <div class="input-group">
+	                    <span class="input-group-addon">
+	                        <i class="fa fa-user"></i>
+	                    </span>
+	                    <input 
+	                        type="text" 
+	                        name="username" 
+	                        class="form-control" 
+	                        placeholder="Tài khoản" 
+	                        required
+	                    >
+	                </div>
+	            </div>
+	
+	            <!-- Password -->
+	            <div class="form-group">
+	                <div class="input-group">
+	                    <span class="input-group-addon">
+	                        <i class="fa fa-lock"></i>
+	                    </span>
+	                    <input 
+	                        type="password" 
+	                        name="password" 
+	                        class="form-control" 
+	                        placeholder="Mật khẩu" 
+	                        required
+	                    >
+	                </div>
+	            </div>
+	
+	            <!-- Submit -->
+	            <div class="form-group text-center">
+	                <button type="submit" class="btn btn-success btn-block">Đăng nhập</button>
+	            </div>
+	
+	            <p class="text-center">
+	                Chưa có tài khoản? <a href="register.jsp">Đăng ký ngay</a>
+	            </p>
+	        </form>
+	    </div>
+	</body>
+	</html>

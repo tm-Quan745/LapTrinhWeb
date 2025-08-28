@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký tài khoản</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        .container {
+            width: 400px;
+            margin: 80px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Đăng ký tài khoản</h2>
+    <form action="register" method="post">
+        <label for="username">Tên đăng nhập:</label>
+        <input type="text" name="username" id="username" required>
+
+        <label for="password">Mật khẩu:</label>
+        <input type="password" name="password" id="password" required>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+
+        <label for="fullname">Họ và tên:</label>
+        <input type="text" name="fullname" id="fullname">
+
+        <label for="avatar">Avatar (URL hình ảnh):</label>
+        <input type="text" name="avatar" id="avatar">
+
+        <label for="phone">Số điện thoại:</label>
+        <input type="text" name="phone" id="phone">
+
+        <!-- roleid mặc định = 2 (user), hidden -->
+        <input type="hidden" name="roleid" value="2">
+
+        <button type="submit">Đăng ký</button>
+    </form>
+</div>
+</body>
+</html>
